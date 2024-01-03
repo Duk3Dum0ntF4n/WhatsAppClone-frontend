@@ -8,8 +8,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
-import com.ocean.whatsappclone.ui.components.MenuDrawer
-import com.ocean.whatsappclone.ui.screens.ChatScreen
+import com.ocean.whatsappclone.presentation.MainViewModel
+import com.ocean.whatsappclone.util.components.MenuDrawer
 import com.ocean.whatsappclone.ui.theme.WhatsAppCloneTheme
 
 class MainActivity : ComponentActivity() {

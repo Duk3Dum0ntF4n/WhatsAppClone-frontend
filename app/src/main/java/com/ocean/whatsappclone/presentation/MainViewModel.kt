@@ -1,11 +1,10 @@
-package com.ocean.whatsappclone
+package com.ocean.whatsappclone.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ocean.whatsappclone.domain.Message
 import com.ocean.whatsappclone.domain.Chat
-import com.ocean.whatsappclone.ui.ListScreenState
 
 class MainViewModel :ViewModel() {
 

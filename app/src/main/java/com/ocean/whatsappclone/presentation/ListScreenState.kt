@@ -1,8 +1,8 @@
-package com.ocean.whatsappclone.ui
+package com.ocean.whatsappclone.presentation
 
 sealed class ListScreenState {
 
-    object Initial:ListScreenState()
+    object Initial: ListScreenState()
 
     data class Chats(val chats: List<com.ocean.whatsappclone.domain.Chat>) : ListScreenState()
 

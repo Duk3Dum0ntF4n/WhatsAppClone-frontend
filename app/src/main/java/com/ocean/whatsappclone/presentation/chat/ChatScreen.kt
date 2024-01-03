@@ -1,4 +1,4 @@
-package com.ocean.whatsappclone.ui.screens
+package com.ocean.whatsappclone.presentation.chat
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

@@ -1,4 +1,4 @@
-package com.ocean.whatsappclone.navigation
+package com.ocean.whatsappclone.util.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController

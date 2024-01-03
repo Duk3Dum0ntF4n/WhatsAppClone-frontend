@@ -1,4 +1,4 @@
-package com.ocean.whatsappclone.navigation
+package com.ocean.whatsappclone.util.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
@@ -13,22 +13,22 @@ sealed class NavigationItem (
     val titleResId: Int,
     val icon: ImageVector
 ) {
-    object Main: NavigationItem (
+    object Main: NavigationItem(
         screen = Screen.Main,
         titleResId = R.string.nav_main,
         icon = Icons.Outlined.Send
     )
-    object Contacts: NavigationItem (
+    object Contacts: NavigationItem(
         screen = Screen.Contacts,
         titleResId = R.string.nav_contacts,
         icon = Icons.Outlined.AccountCircle
     )
-    object Calls: NavigationItem (
+    object Calls: NavigationItem(
         screen = Screen.Calls,
         titleResId = R.string.nav_calls,
         icon = Icons.Outlined.Call
     )
-    object Settings: NavigationItem (
+    object Settings: NavigationItem(
         screen = Screen.Settings,
         titleResId = R.string.nav_settings,
         icon = Icons.Outlined.Settings

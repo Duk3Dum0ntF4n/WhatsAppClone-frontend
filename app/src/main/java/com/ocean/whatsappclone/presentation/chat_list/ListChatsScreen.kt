@@ -1,4 +1,4 @@
-package com.ocean.whatsappclone.ui.screens
+package com.ocean.whatsappclone.presentation.chat_list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,9 +36,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ocean.whatsappclone.MainViewModel
+import com.ocean.whatsappclone.presentation.MainViewModel
 import com.ocean.whatsappclone.domain.Chat
-import com.ocean.whatsappclone.ui.ListScreenState
+import com.ocean.whatsappclone.presentation.chat.ChatScreen
+import com.ocean.whatsappclone.presentation.ListScreenState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
