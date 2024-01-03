@@ -23,22 +23,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.ocean.whatsappclone.domain.ListChat
-import com.ocean.whatsappclone.domain.ChatContent
+import com.ocean.whatsappclone.domain.Chat
+import com.ocean.whatsappclone.domain.Message
 import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(
-    listChat: ListChat,
-    allMessageContent: List<ChatContent>,
+    listChat: Chat,
+    allMessageContent: List<Message>,
     onBackPressed: () -> Unit
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = listChat.author)
+                    Text(text = listChat.username)
                 },
                 navigationIcon = {
                     IconButton(onClick = { onBackPressed() }) {
@@ -53,8 +53,7 @@ fun ChatScreen(
                 .padding(paddingValues)
         ) {
             items(
-                items = allMessageContent,
-                key = { it.id }
+                items = allMessageContent
             ) {
                 ChatMessage(message = it, isMy = Random.nextBoolean())
             }
@@ -64,7 +63,7 @@ fun ChatScreen(
 
 @Composable
 private fun ChatMessage(
-    message: ChatContent,
+    message: Message,
     isMy: Boolean
 ) {
     Row(
@@ -105,7 +104,7 @@ private fun ChatMessage(
                     .fillMaxWidth()
                     .padding(bottom = 10.dp, end = 10.dp),
                 textAlign = TextAlign.End,
-                text = message.time,
+                text = message.formattedTime,
                 color = MaterialTheme.colorScheme.tertiary
             )
         }

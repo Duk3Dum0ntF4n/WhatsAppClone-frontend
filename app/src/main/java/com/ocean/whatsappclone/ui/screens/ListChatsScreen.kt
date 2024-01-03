@@ -19,13 +19,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material3.Card
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -39,7 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ocean.whatsappclone.MainViewModel
-import com.ocean.whatsappclone.domain.ListChat
+import com.ocean.whatsappclone.domain.Chat
 import com.ocean.whatsappclone.ui.ListScreenState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -100,13 +98,13 @@ fun ListChatsScreen(
 @Composable
 private fun ChatLists(
     viewModel: MainViewModel,
-    chats: List<ListChat>,
+    chats: List<Chat>,
     paddingValues: PaddingValues,
 ) {
     LazyColumn(
         modifier = Modifier.padding(paddingValues)
     ) {
-        items(items = chats, key = { it.chat_id }) {
+        items(items = chats) {
             ListItem(
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.background)
@@ -125,7 +123,7 @@ private fun ChatLists(
 @Composable
 private fun ListItem(
     modifier: Modifier = Modifier,
-    chat: ListChat,
+    chat: Chat,
     onChatClickListener: () -> Unit
 ) {
     Card(
@@ -152,17 +150,10 @@ private fun ListItem(
             ) {
                 Spacer(modifier = Modifier.height(5.dp))
                 Text(
-                    text = chat.author,
+                    text = chat.username,
                     fontSize = 24.sp
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = chat.prev_text,
-                    fontSize = 16.sp
-                )
             }
-            Text(text = chat.prev_time)
-            Spacer(modifier = Modifier.width(10.dp))
         }
     }
 }

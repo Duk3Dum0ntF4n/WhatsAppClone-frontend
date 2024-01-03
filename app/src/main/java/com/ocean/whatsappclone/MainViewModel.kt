@@ -3,21 +3,27 @@ package com.ocean.whatsappclone
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ocean.whatsappclone.domain.ChatContent
-import com.ocean.whatsappclone.domain.ListChat
+import com.ocean.whatsappclone.domain.Message
+import com.ocean.whatsappclone.domain.Chat
 import com.ocean.whatsappclone.ui.ListScreenState
 
 class MainViewModel :ViewModel() {
 
-    private val messages = mutableListOf<ChatContent>().apply {
+    private val messages = mutableListOf<Message>().apply {
         repeat(20) {
-            add(ChatContent(id = it))
+            add(Message(
+                text = "Test",
+                formattedTime = "00:00",
+                username = "test"
+            ))
         }
     }
 
-    private val sourceList = mutableListOf<ListChat>().apply {
+    private val sourceList = mutableListOf<Chat>().apply {
         repeat(10) {
-            add(ListChat(chat_id = it))
+            add(Chat(
+                username = "test"
+            ))
         }
     }
     private val initialState = ListScreenState.Chats(sourceList)
@@ -26,7 +32,7 @@ class MainViewModel :ViewModel() {
 
     private var savedState: ListScreenState? = initialState
 
-    fun showChatMessages(listChat: ListChat) {
+    fun showChatMessages(listChat: Chat) {
         savedState = _screenState.value
         _screenState.value = ListScreenState.Messages(chat = listChat, messages = messages)
     }
