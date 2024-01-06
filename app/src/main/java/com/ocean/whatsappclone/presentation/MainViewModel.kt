@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ocean.whatsappclone.domain.Message
 import com.ocean.whatsappclone.domain.Chat
+import com.ocean.whatsappclone.presentation.chat_list.ListScreenState
 
 class MainViewModel :ViewModel() {
 
@@ -12,7 +13,6 @@ class MainViewModel :ViewModel() {
         repeat(20) {
             add(Message(
                 text = "Test",
-                formattedTime = "00:00",
                 username = "test"
             ))
         }

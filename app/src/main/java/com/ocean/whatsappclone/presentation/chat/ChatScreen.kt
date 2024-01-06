@@ -98,15 +98,6 @@ private fun ChatMessage(
                 text = message.text,
                 color = MaterialTheme.colorScheme.onSecondaryContainer
             )
-            Spacer(modifier = Modifier.height(5.dp))
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 10.dp, end = 10.dp),
-                textAlign = TextAlign.End,
-                text = message.formattedTime,
-                color = MaterialTheme.colorScheme.tertiary
-            )
         }
     }
 }

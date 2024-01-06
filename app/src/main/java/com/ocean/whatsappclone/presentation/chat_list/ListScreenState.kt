@@ -1,4 +1,4 @@
-package com.ocean.whatsappclone.presentation
+package com.ocean.whatsappclone.presentation.chat_list
 
 sealed class ListScreenState {
 

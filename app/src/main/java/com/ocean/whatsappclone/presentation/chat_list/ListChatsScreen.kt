@@ -39,7 +39,6 @@ import androidx.compose.ui.unit.sp
 import com.ocean.whatsappclone.presentation.MainViewModel
 import com.ocean.whatsappclone.domain.Chat
 import com.ocean.whatsappclone.presentation.chat.ChatScreen
-import com.ocean.whatsappclone.presentation.ListScreenState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -50,7 +49,6 @@ fun ListChatsScreen(
     drawerState: DrawerState,
     viewModel: MainViewModel
 ) {
-    //Создай стейт где будешь хранить состояние scaffold
     Scaffold(
         topBar = {
             TopAppBar(
