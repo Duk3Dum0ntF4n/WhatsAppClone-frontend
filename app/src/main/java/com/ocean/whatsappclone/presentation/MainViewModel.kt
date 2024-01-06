@@ -1,48 +1,90 @@
 package com.ocean.whatsappclone.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.ocean.whatsappclone.domain.model.Message
-import com.ocean.whatsappclone.domain.model.Chat
-import com.ocean.whatsappclone.presentation.chat_list.ListScreenState
+import androidx.lifecycle.viewModelScope
+import com.ocean.whatsappclone.data.remote.service.MessengerSocketService
+import com.ocean.whatsappclone.util.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel :ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val messengerSocketService: MessengerSocketService,
+    private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
 
-    private val messages = mutableListOf<Message>().apply {
-        repeat(20) {
-            add(
-                Message(
-                text = "Test",
-                username = "test",
-                    chatId = "1"
-            )
+    private val _messageText = mutableStateOf("")
+    val messageText: State<String> = _messageText
+
+    private val _state = mutableStateOf(MainState())
+    val state: State<MainState> = _state
+
+    private val _toastEvent = MutableSharedFlow<String>()
+    val toastEvent = _toastEvent.asSharedFlow()
+
+    fun connect() {
+        savedStateHandle.get<String>("username")?.let { username ->
+            getAllMessages(username)
+            viewModelScope.launch {
+                when (val result = messengerSocketService.initSession(username)) {
+                    is Resource.Success -> {
+                        messengerSocketService.observeMessages()
+                            .onEach { message ->
+                                val newList = state.value.messages.toMutableList().apply {
+                                    add(0, message)
+                                }
+                                _state.value = state.value.copy(
+                                    messages = newList
+                                )
+                            }
+                    }
+
+                    is Resource.Error -> {
+                        _toastEvent.emit(result.message ?: "Unknown error")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getAllMessages(username: String) {
+        viewModelScope.launch {
+            _state.value = state.value.copy(isLoading = true)
+            val result = messengerSocketService.getAllMessages(username)
+            _state.value = state.value.copy(
+                messages = result,
+                isLoading = false
             )
         }
     }
 
-    private val sourceList = mutableListOf<Chat>().apply {
-        repeat(10) {
-            add(
-                Chat(
-                username = "test",
-                    chatId = "1"
-            )
-            )
+    fun sendMessage(chatId: String) {
+        viewModelScope.launch {
+            if (messageText.value.isNotBlank()) {
+                messengerSocketService.sendMessage(
+                    text = messageText.value,
+                    chatId = chatId
+                )
+            }
         }
     }
-    private val initialState = ListScreenState.Chats(sourceList)
-    private val _screenState = MutableLiveData<ListScreenState>(initialState)
-    val screenState: LiveData<ListScreenState> = _screenState
 
-    private var savedState: ListScreenState? = initialState
-
-    fun showChatMessages(listChat: Chat) {
-        savedState = _screenState.value
-        _screenState.value = ListScreenState.Messages(chat = listChat, messages = messages)
+    fun disconnect() {
+        viewModelScope.launch {
+            messengerSocketService.closeSession()
+        }
     }
 
-    fun closeComments() {
-        _screenState.value = savedState
+    override fun onCleared() {
+        super.onCleared()
+        disconnect()
     }
+
 }

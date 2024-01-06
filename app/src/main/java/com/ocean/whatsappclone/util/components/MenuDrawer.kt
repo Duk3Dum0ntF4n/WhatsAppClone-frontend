@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.ocean.whatsappclone.presentation.MainViewModel
+import com.ocean.whatsappclone.presentation.MainViewModelOld
 import com.ocean.whatsappclone.util.navigation.AppNavGraph
 import com.ocean.whatsappclone.util.navigation.NavigationItem
 import com.ocean.whatsappclone.util.navigation.rememberNavigationState
@@ -41,7 +41,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuDrawer(
-    viewModel: MainViewModel
+    viewModel: MainViewModelOld
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()

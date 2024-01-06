@@ -1,6 +1,10 @@
 package com.ocean.whatsappclone.presentation.chat
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,9 +23,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ocean.whatsappclone.domain.model.Chat
 import com.ocean.whatsappclone.domain.model.Message
+import com.ocean.whatsappclone.ui.theme.WhatsAppCloneTheme
 import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -99,7 +105,7 @@ private fun ChatMessage(
     }
 }
 
-/*@Preview(
+@Preview(
     uiMode = UI_MODE_NIGHT_NO,
     name = "light"
 )
@@ -114,13 +120,17 @@ fun ChatScreenPrev() {
             modifier = Modifier.background(MaterialTheme.colorScheme.background)
         ) {
             ChatMessage(
-                oneMessageContent = MessageContent(),
+                message = Message(
+                    "hello","test_1", "1"
+                ),
                 isMy = false
             )
             ChatMessage(
-                oneMessageContent = MessageContent(),
+                message = Message(
+                    "hello","test_1", "1"
+                ),
                 isMy = true
             )
         }
     }
-}*/
+}

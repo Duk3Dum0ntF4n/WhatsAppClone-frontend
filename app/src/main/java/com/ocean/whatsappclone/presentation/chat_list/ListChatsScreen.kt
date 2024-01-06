@@ -36,7 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ocean.whatsappclone.presentation.MainViewModel
+import com.ocean.whatsappclone.presentation.MainViewModelOld
 import com.ocean.whatsappclone.domain.model.Chat
 import com.ocean.whatsappclone.presentation.chat.ChatScreen
 import kotlinx.coroutines.CoroutineScope
@@ -47,7 +47,7 @@ import kotlinx.coroutines.launch
 fun ListChatsScreen(
     scope: CoroutineScope,
     drawerState: DrawerState,
-    viewModel: MainViewModel
+    viewModel: MainViewModelOld
 ) {
     Scaffold(
         topBar = {
@@ -96,7 +96,7 @@ fun ListChatsScreen(
 
 @Composable
 private fun ChatLists(
-    viewModel: MainViewModel,
+    viewModel: MainViewModelOld,
     chats: List<Chat>,
     paddingValues: PaddingValues,
 ) {
