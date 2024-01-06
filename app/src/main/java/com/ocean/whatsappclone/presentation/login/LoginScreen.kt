@@ -24,11 +24,11 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel(),
-    //onNavigate: (String) -> Unit
+    onNavigate: (String) -> Unit
 ) {
     LaunchedEffect(key1 = true) {
-        viewModel.onJoinMessenger.collectLatest { username ->
-            //onNavigate("messenger_screen/$username")
+        viewModel.onJoinMessenger.collectLatest {
+            onNavigate("main_screen")
         }
     }
     Box(

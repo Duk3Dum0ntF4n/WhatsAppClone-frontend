@@ -6,6 +6,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ocean.whatsappclone.data.remote.service.MessengerSocketService
+import com.ocean.whatsappclone.domain.model.Chat
+import com.ocean.whatsappclone.domain.model.Message
 import com.ocean.whatsappclone.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -37,12 +39,13 @@ class MainViewModel @Inject constructor(
                     is Resource.Success -> {
                         messengerSocketService.observeMessages()
                             .onEach { message ->
-                                val newList = state.value.messages.toMutableList().apply {
+                                val newMessageList = state.value.messages.toMutableList().apply {
                                     add(0, message)
                                 }
                                 _state.value = state.value.copy(
-                                    messages = newList
+                                    messages = newMessageList
                                 )
+                                createChat(message)
                             }
                     }
 
@@ -61,6 +64,22 @@ class MainViewModel @Inject constructor(
             _state.value = state.value.copy(
                 messages = result,
                 isLoading = false
+            )
+            result.filter { it.username != username }.forEach { message ->
+                createChat(message)
+            }
+        }
+    }
+
+    private fun createChat(message: Message) {
+        if (state.value.chats.firstOrNull { it.chatId == message.chatId } == null) {
+            val newChatList = state.value.chats.toMutableList().apply {
+                add(
+                    0, Chat(username = message.username, chatId = message.chatId)
+                )
+            }
+            _state.value = state.value.copy(
+                chats = newChatList
             )
         }
     }
