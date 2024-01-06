@@ -3,26 +3,30 @@ package com.ocean.whatsappclone.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ocean.whatsappclone.domain.Message
-import com.ocean.whatsappclone.domain.Chat
+import com.ocean.whatsappclone.domain.model.Message
+import com.ocean.whatsappclone.domain.model.Chat
 import com.ocean.whatsappclone.presentation.chat_list.ListScreenState
 
 class MainViewModel :ViewModel() {
 
     private val messages = mutableListOf<Message>().apply {
         repeat(20) {
-            add(Message(
+            add(
+                Message(
                 text = "Test",
                 username = "test"
-            ))
+            )
+            )
         }
     }
 
     private val sourceList = mutableListOf<Chat>().apply {
         repeat(10) {
-            add(Chat(
+            add(
+                Chat(
                 username = "test"
-            ))
+            )
+            )
         }
     }
     private val initialState = ListScreenState.Chats(sourceList)

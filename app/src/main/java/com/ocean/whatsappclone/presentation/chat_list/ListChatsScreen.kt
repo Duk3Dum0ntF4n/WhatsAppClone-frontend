@@ -37,7 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ocean.whatsappclone.presentation.MainViewModel
-import com.ocean.whatsappclone.domain.Chat
+import com.ocean.whatsappclone.domain.model.Chat
 import com.ocean.whatsappclone.presentation.chat.ChatScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
