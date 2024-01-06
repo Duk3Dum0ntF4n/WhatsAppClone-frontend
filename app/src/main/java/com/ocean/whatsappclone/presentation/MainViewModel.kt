@@ -14,7 +14,8 @@ class MainViewModel :ViewModel() {
             add(
                 Message(
                 text = "Test",
-                username = "test"
+                username = "test",
+                    chatId = "1"
             )
             )
         }
@@ -24,7 +25,8 @@ class MainViewModel :ViewModel() {
         repeat(10) {
             add(
                 Chat(
-                username = "test"
+                username = "test",
+                    chatId = "1"
             )
             )
         }

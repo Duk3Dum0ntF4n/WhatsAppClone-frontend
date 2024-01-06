@@ -9,22 +9,23 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import com.ocean.whatsappclone.presentation.MainViewModel
+import com.ocean.whatsappclone.presentation.login.LoginScreen
 import com.ocean.whatsappclone.util.components.MenuDrawer
 import com.ocean.whatsappclone.ui.theme.WhatsAppCloneTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    private val viewModel by viewModels<MainViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             WhatsAppCloneTheme {
-                Box(
+                LoginScreen()
+                /*Box(
                     modifier = Modifier.background(MaterialTheme.colorScheme.background)
                 ) {
                     MenuDrawer(viewModel)
-                }
+                }*/
             }
         }
     }
