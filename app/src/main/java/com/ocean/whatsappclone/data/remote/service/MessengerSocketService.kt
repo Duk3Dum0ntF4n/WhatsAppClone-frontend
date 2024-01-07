@@ -16,9 +16,9 @@ interface MessengerSocketService {
 
     suspend fun closeSession()
 
-    suspend fun getAllMessages(username: String): List<Message>
+    suspend fun getAllMessages(chatId: String): List<Message>
 
-    suspend fun getAllChats(chatId: String): List<Chat>
+    suspend fun getAllChats(username: String): List<Chat>
 
     companion object {
         const val BASE_WS_URL = "ws://10.0.2.2:8080"

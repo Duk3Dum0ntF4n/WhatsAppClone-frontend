@@ -60,14 +60,17 @@ class MainViewModel @Inject constructor(
     private fun getAllMessages(username: String) {
         viewModelScope.launch {
             _state.value = state.value.copy(isLoading = true)
-            val result = messengerSocketService.getAllMessages(username)
+            val chatResult = messengerSocketService.getAllChats(username)
+            val messageResult = listOf<Message>()
+            chatResult.forEach { chat ->
+                val chatMessages = messengerSocketService.getAllMessages(chat.chatId)
+                messageResult.toMutableList().addAll(chatMessages)
+            }
             _state.value = state.value.copy(
-                messages = result,
+                chats = chatResult,
+                messages = messageResult,
                 isLoading = false
             )
-            result.filter { it.username != username }.forEach { message ->
-                createChat(message)
-            }
         }
     }
 

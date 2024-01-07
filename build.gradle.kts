@@ -7,5 +7,5 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.50" apply false
 
     //For serialization
-    kotlin("plugin.serialization") version "1.8.10"
+    kotlin("plugin.serialization") version "1.8.10" apply false
 }

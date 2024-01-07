@@ -39,7 +39,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun MainScreen(
-    viewModel: MainViewModel = hiltViewModel()
+    username: String?, viewModel: MainViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {

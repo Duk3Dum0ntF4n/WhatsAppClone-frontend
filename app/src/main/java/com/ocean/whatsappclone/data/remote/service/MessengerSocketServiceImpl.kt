@@ -68,9 +68,9 @@ class MessengerSocketServiceImpl(
         }
     }
 
-    override suspend fun getAllMessages(username: String): List<Message> {
+    override suspend fun getAllMessages(chatId: String): List<Message> {
         return try {
-            client.get<List<MessageReceiveDTO>>("${MessengerSocketService.Endpoints.GetAllMessages.url}/$username")
+            client.get<List<MessageReceiveDTO>>("${MessengerSocketService.Endpoints.GetAllMessages.url}/$chatId")
                 .map { it.toMessage() }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -78,9 +78,9 @@ class MessengerSocketServiceImpl(
         }
     }
 
-    override suspend fun getAllChats(chatId: String): List<Chat> {
+    override suspend fun getAllChats(username: String): List<Chat> {
         return try {
-            client.get<List<ChatDTO>>("${MessengerSocketService.Endpoints.GetAllChats.url}/$chatId")
+            client.get<List<ChatDTO>>("${MessengerSocketService.Endpoints.GetAllChats.url}/$username")
                 .map { it.toChat() }
         } catch (e: Exception) {
             e.printStackTrace()

@@ -27,8 +27,8 @@ fun LoginScreen(
     onNavigate: (String) -> Unit
 ) {
     LaunchedEffect(key1 = true) {
-        viewModel.onJoinMessenger.collectLatest {
-            onNavigate("main_screen")
+        viewModel.onJoinMessenger.collectLatest { username ->
+            onNavigate("main_screen/$username")
         }
     }
     Box(
