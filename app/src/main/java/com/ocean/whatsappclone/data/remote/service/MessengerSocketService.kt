@@ -16,7 +16,7 @@ interface MessengerSocketService {
 
     suspend fun closeSession()
 
-    suspend fun getAllMessages(chatId: String): List<Message>
+    suspend fun getChatMessages(chatId: String): List<Message>
 
     suspend fun getAllChats(username: String): List<Chat>
 
@@ -26,8 +26,8 @@ interface MessengerSocketService {
     }
 
     sealed class Endpoints(val url: String) {
-        object MessengerSocket : Endpoints("$BASE_WS_URL/message")
-        object GetAllMessages : Endpoints("$BASE_HTTP_URL/message")
+        object MessengerSocket : Endpoints("$BASE_WS_URL/send_message")
+        object GetAllMessages : Endpoints("$BASE_HTTP_URL/show_messages")
         object GetAllChats : Endpoints("$BASE_HTTP_URL/chat")
     }
 }

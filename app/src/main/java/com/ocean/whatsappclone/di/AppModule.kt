@@ -1,7 +1,9 @@
 package com.ocean.whatsappclone.di
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.ocean.whatsappclone.data.remote.service.MessengerSocketService
 import com.ocean.whatsappclone.data.remote.service.MessengerSocketServiceImpl
+import com.ocean.whatsappclone.presentation.MainViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

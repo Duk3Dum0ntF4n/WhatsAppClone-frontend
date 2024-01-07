@@ -39,12 +39,12 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun MainScreen(
-    username: String?, viewModel: MainViewModel = hiltViewModel()
+    viewModel: MainViewModel,
+    onChatClicked: (String) -> Unit
 ) {
-    val context = LocalContext.current
     LaunchedEffect(key1 = true) {
-        viewModel.toastEvent.collectLatest { message ->
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        viewModel.onChatClicked.collectLatest { chatId ->
+            onChatClicked("chat_screen/$chatId")
         }
     }
 
@@ -53,8 +53,6 @@ fun MainScreen(
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_START) {
                 viewModel.connect()
-            } else if (event == Lifecycle.Event.ON_STOP) {
-                viewModel.disconnect()
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -63,7 +61,7 @@ fun MainScreen(
         }
     }
 
-    val state = viewModel.state.value
+    val chats = viewModel.state.value.chats
 
     Column(
         modifier = Modifier
@@ -72,73 +70,46 @@ fun MainScreen(
     ) {
         LazyColumn(
             modifier = Modifier
-                .weight(1f)
                 .fillMaxWidth(),
             reverseLayout = true
         ) {
             item {
                 Spacer(modifier = Modifier.height(32.dp))
             }
-            items(state.chats) { chat ->
-                ChatElement(chat)
-            }
-        }
-    }
-}
-
-@Composable
-fun ChatElement(
-    chat: Chat,
-) {
-    Card(
-        modifier = Modifier
-            .padding(10.dp)
-            .fillMaxSize()
-            .clickable {
-                TODO("Add click listener here")
-            },
-        shape = RoundedCornerShape(20.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
-        ) {
-            Spacer(modifier = Modifier.width(10.dp))
-            Image(
-                modifier = Modifier.size(50.dp),
-                imageVector = chat.avatar,
-                contentDescription = "Chat avatar"
-            )
-            Spacer(modifier = Modifier.width(10.dp))
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-            ) {
-                Spacer(modifier = Modifier.height(5.dp))
-                Text(
-                    text = chat.username,
-                    fontSize = 24.sp
-                )
-            }
-        }
-    }
-}
-
-@Preview(
-    uiMode = UI_MODE_NIGHT_NO,
-    name = "Light"
-)
-@Preview(
-    uiMode = UI_MODE_NIGHT_YES,
-    name = "Dark"
-)
-@Composable
-fun MainScreenPrev() {
-    WhatsAppCloneTheme {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(3) {
-                ChatElement(chat = Chat(username = "test", chatId = "1"))
+            items(chats) { chat ->
+                Card(
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .fillMaxSize()
+                        .clickable {
+                            viewModel.onChatClicked(chat.chatId)
+                        },
+                    shape = RoundedCornerShape(20.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Image(
+                            modifier = Modifier.size(50.dp),
+                            imageVector = chat.avatar,
+                            contentDescription = "Chat avatar"
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxHeight()
+                        ) {
+                            Spacer(modifier = Modifier.height(5.dp))
+                            Text(
+                                text = chat.username,
+                                fontSize = 24.sp
+                            )
+                        }
+                    }
+                }
             }
         }
     }

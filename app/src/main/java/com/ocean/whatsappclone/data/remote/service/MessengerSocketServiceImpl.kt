@@ -68,7 +68,7 @@ class MessengerSocketServiceImpl(
         }
     }
 
-    override suspend fun getAllMessages(chatId: String): List<Message> {
+    override suspend fun getChatMessages(chatId: String): List<Message> {
         return try {
             client.get<List<MessageReceiveDTO>>("${MessengerSocketService.Endpoints.GetAllMessages.url}/$chatId")
                 .map { it.toMessage() }
