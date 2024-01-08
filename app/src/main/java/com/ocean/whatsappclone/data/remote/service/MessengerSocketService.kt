@@ -12,7 +12,7 @@ interface MessengerSocketService {
 
     suspend fun sendMessage(text: String, chatId: String)
 
-    suspend fun observeMessages(): Flow<Message>
+    fun observeMessages(): Flow<Message>
 
     suspend fun closeSession()
 

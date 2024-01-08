@@ -14,6 +14,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.util.Collections.addAll
@@ -53,14 +54,14 @@ class MainViewModel @Inject constructor(
                 is Resource.Success -> {
                     messengerSocketService.observeMessages()
                         .onEach { message ->
-                            val newMessageList = state.value.messages.toMutableList().apply {
+                            val newMessageList = state.value.messages.reversed().toMutableList().apply {
                                 add(0, message)
                             }
                             _state.value = state.value.copy(
-                                messages = newMessageList
+                                messages = newMessageList.reversed()
                             )
                             createChat(message)
-                        }
+                        }.launchIn(viewModelScope)
                 }
 
                 is Resource.Error -> {
@@ -108,6 +109,11 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun getChatMessages(chatId: String): List<Message> {
+        return state.value.messages
+            .filter { it.chatId == chatId }
+    }
+
     fun onMessageChange(message: String) {
         _messageText.value = message
     }
@@ -119,6 +125,7 @@ class MainViewModel @Inject constructor(
                     text = messageText.value,
                     chatId = currentChat.value
                 )
+                _messageText.value = ""
             }
         }
     }

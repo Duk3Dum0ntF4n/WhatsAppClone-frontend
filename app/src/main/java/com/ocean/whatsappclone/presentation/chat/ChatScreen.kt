@@ -1,11 +1,9 @@
 package com.ocean.whatsappclone.presentation.chat
 
-import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,8 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.ocean.whatsappclone.domain.model.Message
 import com.ocean.whatsappclone.presentation.MainViewModel
 import com.ocean.whatsappclone.ui.theme.WhatsAppCloneTheme
 import kotlinx.coroutines.flow.collectLatest
@@ -48,6 +44,7 @@ fun ChatScreen(
         }
     }
     val username = viewModel.username.value
+    val messages = viewModel.getChatMessages(chatId)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -57,9 +54,9 @@ fun ChatScreen(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(),
-            reverseLayout = true
+            verticalArrangement = Arrangement.Bottom
         ) {
-            items(viewModel.state.value.messages.filter { it.chatId == chatId }) { message ->
+            items(messages) { message ->
                 ChatMessage(text = message.text, isMy = message.username == username)
             }
         }

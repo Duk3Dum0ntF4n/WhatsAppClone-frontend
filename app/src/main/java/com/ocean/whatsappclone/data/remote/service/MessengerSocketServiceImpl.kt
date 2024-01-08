@@ -52,7 +52,7 @@ class MessengerSocketServiceImpl(
         }
     }
 
-    override suspend fun observeMessages(): Flow<Message> {
+    override fun observeMessages(): Flow<Message> {
         return try {
             socket?.incoming
                 ?.receiveAsFlow()
