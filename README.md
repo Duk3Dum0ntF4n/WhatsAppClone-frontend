@@ -18,3 +18,7 @@
 - Kotlin serialization
 - Dagger Hilt
 - Jetpack Compose
+
+
+Все права зарегистрированы
+©Duk3Dum0ntF4n
