@@ -1,24 +1,23 @@
-## Для чего: Android
+## For Android
 
-Приложение представляет собой клиент. При успешном вводе логина пользователю будет отображён список чатов с различными людьми. При нажатии на чат пользователь сможет посмотреть все сообщения из этого чата, отобразить только-что полученное или отправить новое. Нажав на назад пользователь может сменить чат.
-Данные передаются в нешифрованном виде в формате Json.
+Application is a simple android WebSocket messenger client. After a successful login a list of active chats will be presented for user. After clicking on it you can see all messages there, receive or send new. By pressing "back" button you can go back to the list of chats. By now new chat can be added only in database on backend server.
 
-### Модули:
-- data - содержит в себе сервис получение данных из интернета и дата классы их транспортировки
-- di - необходимый модуль для внедрения зависимостей при помощи dagger hilt
-- domain - содержит модели данных для их отображения в UI
-- presentation - экраны и viewmodel к ним
-- UI - по дефолту
-- util - содержит полезные утилиты
+[The backend server repository](https://github.com/Duk3Dum0ntF4n/WhatsAppClone-backend)
 
-### Язык написания:Kotlin
+## Modules:
+- data - gaining data from backend and classes for their transport
+- di - dependencies injection using dagger hilt
+- domain - data models to be shown in UI
+- presentation - screens and their ViewModels
+- UI - default Jetpack Compose
+- util - some useful utils
 
-### Подключаемые фреймворки:
+## Frameworks:
 - Ktor
 - Kotlin serialization
 - Dagger Hilt
 - Jetpack Compose
 
 
-Все права зарегистрированы
+
 ©Duk3Dum0ntF4n
