@@ -1,7 +1,6 @@
 ## For Android
 
-Application is a simple android WebSocket messenger client. After a successful login a list of active chats will be presented for user. After clicking on it you can see all messages there, receive or send new. By pressing "back" button you can go back to the list of chats. By now new chat can be added only in database on backend server.
-
+Application is a simple android WebSocket messenger client. After a successful login a list of active chats will be presented for user. After clicking on it you can see all messages there, receive or send new. By pressing "back" button you can go back to the list of chats. By now new chat can be added only in database on backend server. 
 [The backend server repository](https://github.com/Duk3Dum0ntF4n/WhatsAppClone-backend)
 
 ## Modules:
@@ -12,12 +11,4 @@ Application is a simple android WebSocket messenger client. After a successful l
 - UI - default Jetpack Compose
 - util - some useful utils
 
-## Frameworks:
-- Ktor
-- Kotlin serialization
-- Dagger Hilt
-- Jetpack Compose
-
-
-
-©Duk3Dum0ntF4n
+Feel free to push some changes to this project and use it as simple example of websocket messenger client ☺️
